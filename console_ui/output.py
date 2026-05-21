@@ -1,4 +1,4 @@
-from .colors import RED, GREEN, YELLOW, CYAN, BOLD, RESET
+from .colors import RED, GREEN, YELLOW, BLUE, CYAN, BOLD, RESET
 
 
 def print_error(message):
@@ -19,6 +19,11 @@ def print_success_items(items):
 def print_warning(message):
     for line in message.splitlines():
         print(f"{YELLOW}{BOLD}{line}{RESET}")
+
+
+def print_info(message):
+    for line in message.splitlines():
+        print(f"{BLUE}{BOLD}{line}{RESET}")
 
 
 def print_title(title):
