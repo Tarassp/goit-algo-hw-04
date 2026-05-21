@@ -1,21 +1,22 @@
 from pathlib import Path
 
 from console_ui import print_error, print_success
+from file_reader import read_text_lines
 
 EXPECTED_FORMAT = "Ім'я Прізвище,зарплата (наприклад, 'Alex Korp,3000' або 'Alex Korp,3000.50')"
 DEFAULT_SALARY_FILE = Path(__file__).parent / "salary.txt"
 
 
 def total_salary(path):
-    try:
-        with open(path, "r", encoding="utf-8") as file:
-            lines = [(num, line.strip()) for num, line in enumerate(file, start=1) if line.strip()]
-    except FileNotFoundError:
-        print_error(f"Файл '{path}' не знайдено.")
+    lines = read_text_lines(path)
+    if lines is None:
         return None
 
     salaries = []
-    for line_num, line in lines:
+    for line_num, line in enumerate(lines, start=1):
+        line = line.strip()
+        if not line:
+            continue
         parts = line.split(",")
         if len(parts) != 2:
             print_error(
