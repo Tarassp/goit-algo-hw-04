@@ -86,7 +86,6 @@ python -m personal_assistant
 - [`handlers.py`](personal_assistant/handlers.py) — фабрика `make_handlers()`, що повертає `dict[Command, HandlerType]`. Обробники тримають `contacts` через **замикання** — інкапсульований стан без глобальних змінних. Помилки сигналізуються **винятками**, а не магічними рядками.
 - [`bot.py`](personal_assistant/bot.py) — диспатчер `process_command` (чиста функція, без I/O) і REPL `run`. Мапить виняток → `Severity` → принтер із `console_ui`.
 - [`formatters.py`](personal_assistant/formatters.py) — побудова таблиці контактів із box-drawing символами та вирівнюванням колонок під найдовші значення.
-- [`__main__.py`](personal_assistant/__main__.py) — тонкий entry point: `from .bot import run`.
 
 Команди `exit`/`close` обидві мапляться на один обробник `handle_exit`, який кидає `ExitSignal` — диспатчер ловить його як спецсигнал на завершення REPL.
 
