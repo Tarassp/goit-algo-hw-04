@@ -17,6 +17,8 @@ def make_handlers() -> dict[Command, HandlerType]:
         if len(args) != 2:
             raise InvalidArgsError("Give me name and phone please.")
         name, phone = args
+        if not phone.isdigit():
+            raise InvalidArgsError("Phone must contain digits only.")
         contacts[name] = phone
 
     def handle_change(args: list[str]) -> None:
@@ -25,6 +27,8 @@ def make_handlers() -> dict[Command, HandlerType]:
         name, phone = args
         if name not in contacts:
             raise ContactNotFoundError(name)
+        if not phone.isdigit():
+            raise InvalidArgsError("Phone must contain digits only.")
         contacts[name] = phone
 
     def handle_phone(args: list[str]) -> str:
